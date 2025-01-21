@@ -1,0 +1,54 @@
+{% extends "authbase.html" %}
+
+{% set active_page = "signup" %}
+{% set page_title = "BotanIQ - Registrierung" %}
+
+{% block css %}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/signup.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div id="register">
+        <div class="container">
+            <div id="register-row" class="row justify-content-center align-items-center">
+                <div id="register-column" class="col-md-6">
+                    <div id="register-box" class="col-md-12">
+                        <form id="register-form" class="form" action="" method="post">
+                            <h3 class="text-center">Registrierung</h3>
+
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    <div class="text-center alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ messages[0] }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+
+                            <div class="form-group">
+                                <label for="email" class="">Email:</label><br>
+                                <input type="email" name="email" id="email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="">Name:</label><br>
+                                <input type="text" name="name" id="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="">Paswort:</label><br>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-md" id="submit" value="Registrieren">
+                            </div>
+                            <div id="login-link" class="text-right">
+                                <a href="{{ url_for('auth.login') }}" class="">Bereits einen Account?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

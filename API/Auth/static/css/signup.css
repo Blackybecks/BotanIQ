@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #01d1b2;
+  height: 100vh;
+}
+
+#register .container #register-row #register-column #register-box {
+  margin-top: 120px;
+  max-width: 600px;
+  max-height: 420px;
+  border: 1px solid #9C9C9C;
+  background-color: #fffeff;
+  color: #212529;
+}
+
+#register .container #register-row #register-column #register-box #register-form {
+  padding: 20px;
+}
+
+#register .container #register-row #register-column #register-box #register-form #login-link {
+  margin-top: -85px;
+}
+
+#register-form {
+	margin-bottom: 25px;
+}
+
+#submit {
+	background-color: #209ced;
+	color: white;
+}
+
+#login-link {
+	padding-top: 45px;
+}

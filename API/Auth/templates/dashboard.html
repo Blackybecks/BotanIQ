@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% set active_page = "dashboard" %}
+{% set page_title = "BotanIQ - Dashboard" %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/simplepicker@2.0.3/dist/simplepicker.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block js %}
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/mobile/bootstrap-table-mobile.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/simplepicker@2.0.3/dist/simplepicker.js"></script>
+	<script type="text/javascript" src="{{ url_for('static',filename='js/dashboard.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+		<h1 class="h2">Dashboard</h1>
+		<div class="btn-toolbar mb-2 mb-md-0">	
+         	<div class="input-group">
+		  		<div class="input-group-prepend">
+		    		<span class="input-group-text">
+		    			<span data-feather="calendar"></span>
+		    		</span>
+		  		</div>
+		  		<input type="text" class="form-control dateTimePickerInputFrom" readonly>
+		  		<input type="text" class="form-control dateTimePickerInputTo" readonly>
+			</div>
+			<div class="dateTimePickerFrom"></div>
+			<div class="dateTimePickerTo"></div>
+		</div>	
+	</div>
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+		<div class="col-md-3"> 
+			<h4 class="h4">Wassertank</h4>
+			<span style="color: black;">{{ rows[-1][3] }}%</span>
+			<div class="progress-bar">
+			    <div class="progress-track" style="width: 204px; border: 2px solid {{ color }};">
+			      	<div class="progress-fill" style="width: 200px; height: {{ rows[-1][3] }}%; top: {{ 100 - rows[-1][3] }}%; background: #d4f1f9;">
+			      	</div>
+			    </div>
+			</div>
+		</div>	
+		<div class="col-md-3"> 
+			<h4 class="h4">Pumpe</h4>
+			<div style="width: 200px; height: 90px; padding-top: 10px;">
+				{% if devices[-1][2] == 1 %}
+				    <svg xmlns="http://www.w3.org/2000/svg" style="width: 60px; height: 60px;" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#74C0FC" d="M224 0c38.6 0 71.9 22.8 87.2 55.7C325.7 41.1 345.8 32 368 32c38.7 0 71 27.5 78.4 64l1.6 0c35.3 0 64 28.7 64 64s-28.7 64-64 64l-320 0c-35.3 0-64-28.7-64-64s28.7-64 64-64c0-53 43-96 96-96zM140.6 292.3l-48 80c-6.8 11.4-21.6 15-32.9 8.2s-15.1-21.6-8.2-32.9l48-80c6.8-11.4 21.6-15.1 32.9-8.2s15.1 21.6 8.2 32.9zm327.8-32.9c11.4 6.8 15 21.6 8.2 32.9l-48 80c-6.8 11.4-21.6 15-32.9 8.2s-15-21.6-8.2-32.9l48-80c6.8-11.4 21.6-15.1 32.9-8.2zM252.6 292.3l-48 80c-6.8 11.4-21.6 15-32.9 8.2s-15.1-21.6-8.2-32.9l48-80c6.8-11.4 21.6-15.1 32.9-8.2s15.1 21.6 8.2 32.9zm103.8-32.9c11.4 6.8 15 21.6 8.2 32.9l-48 80c-6.8 11.4-21.6 15-32.9 8.2s-15.1-21.6-8.2-32.9l48-80c6.8-11.4 21.6-15.1 32.9-8.2zM306.5 421.9C329 437.4 356.5 448 384 448c26.9 0 55.4-10.8 77.4-26.1c0 0 0 0 0 0c11.9-8.5 28.1-7.8 39.2 1.7c14.4 11.9 32.5 21 50.6 25.2c17.2 4 27.9 21.2 23.9 38.4s-21.2 27.9-38.4 23.9c-24.5-5.7-44.9-16.5-58.2-25C449.5 501.7 417 512 384 512c-31.9 0-60.6-9.9-80.4-18.9c-5.8-2.7-11.1-5.3-15.6-7.7c-4.5 2.4-9.7 5.1-15.6 7.7c-19.8 9-48.5 18.9-80.4 18.9c-33 0-65.5-10.3-94.5-25.8c-13.4 8.4-33.7 19.3-58.2 25c-17.2 4-34.4-6.7-38.4-23.9s6.7-34.4 23.9-38.4c18.1-4.2 36.2-13.3 50.6-25.2c11.1-9.4 27.3-10.1 39.2-1.7c0 0 0 0 0 0C136.7 437.2 165.1 448 192 448c27.5 0 55-10.6 77.5-26.1c11.1-7.9 25.9-7.9 37 0z"/></svg>
+					<div>Bewässert</div>
+				{% else %}
+				   <svg xmlns="http://www.w3.org/2000/svg" style="width: 60px; height: 60px;" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#63E6BE" d="M512 32c0 113.6-84.6 207.5-194.2 222c-7.1-53.4-30.6-101.6-65.3-139.3C290.8 46.3 364 0 448 0l32 0c17.7 0 32 14.3 32 32zM0 96C0 78.3 14.3 64 32 64l32 0c123.7 0 224 100.3 224 224l0 32 0 160c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-160C100.3 320 0 219.7 0 96z"/></svg>
+				   <div>Bewässert nicht</div>
+				{% endif %}
+			</div>
+		</div>
+		<div class="col-md-3">
+			<h4 class="h4">Sonnenlicht</h4>
+			<div>
+				<div class="progress-bar-circle" style="background: 
+    				radial-gradient(closest-side, white 79%, transparent 80% 100%),
+    				conic-gradient(#fad201 {{ 100 / 10 * devices[-1][4] }}%, #f8f32b 0); ">
+    				<div style="position: relative; width: 20px; height: 20px; top: 38px; left: 30px;">{{ (100 / 10 * devices[-1][4])|round|int  }}%</div>
+				  	<progress value="0" min="0" max="100" style="visibility:hidden;height:0;width:0;"></progress>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<h4 class="h4">Rotation</h4>
+			<div>		
+				<div class="progress-bar-circle" style="background: 
+    				radial-gradient(closest-side, white 79%, transparent 80% 100%),
+    				conic-gradient(#fad201 {{ 100 / 360 * devices[-1][3] }}%, #f8f32b 0); ">
+    				<div style="position: relative; width: 20px; height: 20px; top: 38px; left: 38px;">{{ devices[-1][3] }}°</div>
+				  	<progress value="0" min="0" max="100" style="visibility:hidden;height:0;width:0;"></progress>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+		<div class="col-md-6"> 
+			<h4 class="h4">Temperatur</h4>  
+			<canvas class="my-4 chartjs-render-monitor" height="150" id="temperature_chart"></canvas>
+		</div>
+		<div class="col-md-6"> 
+			<h4 class="h4">Luftfeuchtigkeit</h4>  
+			<canvas class="my-4 chartjs-render-monitor" height="150" id="airhumidity_chart"></canvas>
+		</div>
+	</div>
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+		<div class="col-md-6"> 
+			<h4 class="h4">Bodenfeuchtigkeit</h4>  
+			<canvas class="my-4 chartjs-render-monitor" height="150" id="soilhumidity_chart"></canvas>
+		</div>
+
+		
+		
+	</div>
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+		<div class="col-md-12"> 
+			<h4 class="h4">Datensätze</h4>  
+			<div class="table-responsive">
+				<table 
+					id="data_table"
+					data-toggle="data_table"
+			  		data-pagination="true"
+			  		data-pagination-pre-text='<'
+  					data-pagination-next-text='>'
+  					data-search="true"
+  					data-search-highlight="true"
+  					data-show-columns="true"
+  					data-mobile-responsive="true"
+  					data-mobile-responsive="true"
+  					data-check-on-init="true"
+  					data-id-field="id"
+					class="table table-hover table-striped table-sm">
+					<thead>
+						<tr>
+							<th scope="col" data-sortable="true">Id</th>
+							<th scope="col" data-sortable="true">Gerät</th>
+							<th scope="col" data-sortable="true">Temperatur</th>
+							<th scope="col" data-sortable="true">Luftfeuchtigkeit</th>
+							<th scope="col" data-sortable="true">Licht</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for row in rows %}
+						    <tr>
+						        <th scope="row">#{{ row[0] }} </th>
+						        <td>BotanIQ {{ row[1] }}</td>
+						        <td>{{ row[2] }} C°</td>
+						        <td>{{ row[5] }} %</td>
+						        <td>{{ row[6] }} lux</td>
+						    </tr>
+					    {% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

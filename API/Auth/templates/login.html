@@ -1,0 +1,51 @@
+{% extends "authbase.html" %}
+
+{% set active_page = "login" %}
+{% set page_title = "BotanIQ - Login" %}
+
+{% block css %}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post">
+                            <h3 class="text-center">Login</h3>
+
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    <div class="text-center alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ messages[0] }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+
+                            <div class="form-group">
+                                <label for="email" class="">Email:</label><br>
+                                <input type="email" name="email" id="email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="">Paswort:</label><br>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="remember-me" class=""><span>Eingeloggt bleiben</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <input type="submit" name="submit" class="btn btn-md" id="submit" value="Einloggen">
+                            </div>
+                            <div id="register-link" class="text-right">
+                                <a href="{{ url_for('auth.signup') }}">Noch keinen Account?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

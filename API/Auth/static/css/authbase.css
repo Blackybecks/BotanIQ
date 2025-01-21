@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+body{
+    margin: 0;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: white;
+    text-align: left;
+    background-color: #01d1b2;
+}
+
+.navbar-laravel
+{
+    box-shadow: 0 2px 4px rgba(0,0,0,.04);
+    background-color: white;
+}
+
+.navbar-brand , .nav-link
+{
+    font-family: Raleway, sans-serif;
+}

@@ -1,0 +1,27 @@
+{% extends "authbase.html" %}
+
+{% set active_page = "index" %}
+{% set page_title = "BotanIQ - Home" %}
+
+{% block css %}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+	{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ messages[0] }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="content">
+        <h1>BotanIQ</h1>
+        <p class="lead">Willkommen zur Web-Oberfläche von BotanIQ!</p>
+        <p><a href="{{ url_for('auth.login') }}">Jetzt einloggen</a></p>
+    </div>
+{% endblock %}
